@@ -1,2 +1,2 @@
-# Docker Images
-A repository with some useful Docker images for composition.
+# Docker Compose
+A repository with some useful Docker images and installation recipes for composition.
