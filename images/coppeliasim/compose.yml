@@ -14,7 +14,7 @@ services:
       DISPLAY: $DISPLAY # x server related
     privileged: true # Needed for some gpu configurations.
     volumes:
-      - /coppeliasim_scenes:/app/coppeliasim_scenes/
+      - ./coppeliasim_scenes:/app/coppeliasim_scenes/
       - /tmp/.X11-unix:/tmp/.X11-unix # x server related
       - ~/.Xauthority:/root/.Xauthority # x server related
     # Run CoppeliaSim ($COPPELIASIM_PATH is set in /scripts/install_coppeliasim_ubuntu24.sh)
