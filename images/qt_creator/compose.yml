@@ -1,15 +1,24 @@
 # compose.yml
 services:
+  # Create a container for the QT Creator
   qt_creator:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ../..
+      dockerfile: images/qt_creator/Dockerfile
+    stop_signal: SIGINT
+    stop_grace_period: 15s # specify how long Compose must wait when attempting to stop the container if it doesn't handle "stop_signal"
     container_name: qt_creator_container
     environment:
-      DISPLAY: $DISPLAY # x server related
-    privileged: true # Needed for some gpu configurations.
+      DISPLAY: $DISPLAY # x server related for GUI interface
+    privileged: true # Needed for some gpu configurations for GUI interface
     volumes:
-          - /tmp/.X11-unix:/tmp/.X11-unix # x server related
-          - ~/.Xauthority:/root/.Xauthority # x server related
+      - /tmp/.X11-unix:/tmp/.X11-unix # x server related for GUI interface
+      - ~/.Xauthority:/root/.Xauthority # x server related for GUI interface
+      - ./source:/source
+    # open Qt Creator
     command: /bin/bash -c "
       qtcreator"
+    pre_stop:
+      - command: /bin/bash -c "
+          cp /app /source -r;
+          chmod 777 -R /source/"
