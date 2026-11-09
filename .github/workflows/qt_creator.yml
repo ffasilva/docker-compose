@@ -42,8 +42,8 @@ env:
   # Keep the ffasilva namespace.
   IMAGE_NAME: ffasilva/qt_creator
   BUILDX_NO_DEFAULT_ATTESTATIONS: 1 # https://github.com/orgs/community/discussions/45969
-  DOCKERFILE_CONTEXT: "./docker-compose"
-  DOCKERFILE_PATH: "./docker-compose/images/qt_creator/Dockerfile"
+  DOCKERFILE_CONTEXT: "."
+  DOCKERFILE_PATH: "images/qt_creator/Dockerfile"
   DOCKERFILE_TAG: "latest"
   # true on push-to-main and workflow_dispatch; false on pull_request.
   SHOULD_PUBLISH: ${{ github.event_name != 'pull_request' }}
