@@ -1,12 +1,20 @@
 # Docker Compose
 A repository with some useful Docker images and installation recipes for composition.
 
-## Useful Docker instructions
+## How to run the containers
 
-#### Using an external camera macOS (Apple Silicon)
+- Go to the folder of the image you want to use
+- Run:
 
-To use an external camera on your Mac, you'll need to [share your USB devices with Docker](https://docs.docker.com/desktop/features/usbip/). Unfortunately, this is a somewhat manual process that will require you to run a privileged Docker container and attach the right USB device to it. Only then will your external camera be available to other containers.
+```bash
+xhost +local:root
+docker compose up --build -d
+```
 
-First, follow the instructions to install [cargo](https://ports.macports.org/port/cargo/). This might take several minutes.
+- Once finished, stop the containers. Press `Ctrl + C` and run:
 
-Now, follow the official Docker [instructions](https://docs.docker.com/desktop/features/usbip/) to use USB/IP with Docker Desktop. You'll need to follow this procedure, starting from "Step two: Start a privileged Docker container" every time you want to use an external camera.
+```bash
+docker compose down -v --remove-orphans
+```
+
+Some images are meant to be used as a base for your images. For instance, [dq_robotics](https://github.com/ffasilva/docker-compose/tree/main/images/dq_robotics) uses [qt_creator](https://github.com/ffasilva/docker-compose/tree/main/images/qt_creator) as a base image in its [Dockerfile](https://github.com/ffasilva/docker-compose/blob/main/images/dq_robotics/Dockerfile). Check their README.md for more details.
